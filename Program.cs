@@ -9,6 +9,7 @@ namespace cs_day1
       Boolean running = true;
       int playerScore = 0;
       int compScore = 0;
+      int tieCounter = 0;
       Console.Write("Please enter your name: ");
       string name = Console.ReadLine();
       Console.WriteLine($"Thank you, {name}");
@@ -32,11 +33,19 @@ namespace cs_day1
             "scissors"
         };
 
+        while (playerChoice != "rock" && playerChoice != "paper" && playerChoice != "scissors")
+        {
+          Console.WriteLine("Please enter Rock, Paper, or Scissors.");
+          playerChoice = Console.ReadLine().ToLower().Trim();
+        };
+
         string compChoice = choices[compRandom];
         Console.WriteLine($"Player chose: {playerChoice}, Computer chose: {compChoice}");
+
         if (playerChoice == compChoice)
         {
           Console.WriteLine("It's a tie!");
+          tieCounter++;
         }
         else if (playerChoice == "rock")
         {
@@ -77,15 +86,18 @@ namespace cs_day1
             playerScore++;
           }
         }
-        Console.WriteLine($"Current Score: {name}: {playerScore} Computer: {compScore}");
+
+        Console.WriteLine($"Current Score: {name}: {playerScore} Computer: {compScore} Ties: {tieCounter}");
         Console.WriteLine("Would you like to play again? (y/n)");
-        if (Console.ReadKey().KeyChar == 'n' || Console.ReadKey().KeyChar == 'N')
+
+        if (Console.ReadKey().KeyChar == 'n')
         {
           running = false;
           Console.WriteLine();
           Console.WriteLine($"Thank you for playing, {name}!");
           break;
         }
+
       }
     }
   }
